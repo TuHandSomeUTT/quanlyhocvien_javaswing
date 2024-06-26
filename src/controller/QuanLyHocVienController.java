@@ -1,8 +1,12 @@
 package controller;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -19,6 +23,7 @@ import model.HocVien;
 import service.HocVienService;
 import service.HocVienServiceImpl;
 import utility.ClassTableModel;
+import view.HocVienJFrame;
 
 /**
  *
@@ -29,7 +34,8 @@ public class QuanLyHocVienController {
     private JPanel jpnView;
     private JButton btnAdd;
     private JTextField jtfSearch;
-
+    private JTable table;
+    
     private HocVienService hocVienService = null;
     
     private String[] listColumn = {"Mã Học Viên", "STT", "Họ Và Tên", "Ngày Sinh", "Giới Tính", "Số Điện Thoại", "Địa Chỉ", "Tình Trạng"};
@@ -48,7 +54,7 @@ public class QuanLyHocVienController {
         List<HocVien> listItem = hocVienService.getList();
         
         DefaultTableModel model = new ClassTableModel().setTableHocVien(listItem, listColumn);
-        JTable table = new JTable(model);
+        table = new JTable(model);
         
         rowSorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(rowSorter);
@@ -89,6 +95,34 @@ public class QuanLyHocVienController {
         table.getColumnModel().getColumn(1).setMaxWidth(60);
         table.getColumnModel().getColumn(1).setPreferredWidth(60);
         
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && table.getSelectedRow() != -1){
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    int selectedRowIndex = table.getSelectedRow();
+                    selectedRowIndex = table.convertRowIndexToModel(selectedRowIndex);
+                    
+                    HocVien hocVien = new HocVien();
+                    hocVien.setMaHocVien((int) model.getValueAt(selectedRowIndex, 0));
+                    hocVien.setHoTen(model.getValueAt(selectedRowIndex, 2).toString());
+                    hocVien.setNgaySinh((Date) model.getValueAt(selectedRowIndex, 3));
+                    hocVien.setGioiTinh(model.getValueAt(selectedRowIndex, 4).toString().equalsIgnoreCase("Nam"));
+                    hocVien.setSoDienThoai(model.getValueAt(selectedRowIndex, 5) != null ? 
+                            model.getValueAt(selectedRowIndex, 5).toString() : "");
+                    hocVien.setDiaChi(model.getValueAt(selectedRowIndex, 6) != null ?
+                            model.getValueAt(selectedRowIndex, 6).toString() : "");
+                    hocVien.setTinhTrang((boolean) model.getValueAt(selectedRowIndex, 7));
+                    
+                    HocVienJFrame frame = new HocVienJFrame(hocVien);
+                    frame.setTitle("Thông Tin Học Viên");
+                    frame.setResizable(false);
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                }
+            }
+        });
+        
         // design
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         table.getTableHeader().setPreferredSize(new Dimension(100, 50));
@@ -105,5 +139,29 @@ public class QuanLyHocVienController {
         jpnView.add(scrollPane);
         jpnView.validate();
         jpnView.repaint();
+    }
+    
+    public void setEvent(){
+        btnAdd.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // set sự kiện khi nhấn nút thêm thì sẽ hiển thị ra HocVienJPanel để ta thêm học viên
+                HocVienJFrame frame = new HocVienJFrame(new HocVien());
+                frame.setTitle("Thông Tin Học Viên");
+                frame.setLocationRelativeTo(null);
+                frame.setResizable(false);
+                frame.setVisible(true);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnAdd.setBackground(new Color(0, 200, 83));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnAdd.setBackground(new Color(100, 221, 23));
+            }
+        });
     }
 }

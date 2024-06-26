@@ -12,6 +12,7 @@ public class HocVienJPanel extends javax.swing.JPanel {
         
         QuanLyHocVienController controller = new QuanLyHocVienController(jPnView, jBtnAdd, txtSearch);
         controller.setDataToTable();
+        controller.setEvent();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

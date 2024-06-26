@@ -9,4 +9,6 @@ import model.HocVien;
  */
 public interface HocVienService {
     public List<HocVien> getList();
+    
+    public int createUpdate(HocVien hocVien);
 }
