@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import view.HocVienJPanel;
 import view.KhoaHocJPanel;
+import view.ThongKeJPanel;
 import view.TrangChuJPanel;
 
 /**
@@ -73,6 +74,9 @@ public class ChuyenManHinhController {
                     node = new KhoaHocJPanel();
                     break;
                 // More ...    
+                case "ThongKe" :
+                    node = new ThongKeJPanel();
+                    break;
                 default :
                     node = new TrangChuJPanel();
                     break;

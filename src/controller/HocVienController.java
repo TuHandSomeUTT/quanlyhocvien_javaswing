@@ -7,19 +7,22 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.HocVien;
 import service.HocVienService;
 import service.HocVienServiceImpl;
-        
+import java.util.Date;
+
 /**
  *
  * @author Van Tu Nguyen - 72TT11 - UTT - Adam Nguyen.
  * @date Jun 18, 2024
  */
 public class HocVienController {
+
     private JButton btnSubmit;
     private JTextField jtfMaHocVien;
     private JTextField jtfHoTen;
@@ -30,13 +33,13 @@ public class HocVienController {
     private JTextArea jtaDiaChi;
     private JCheckBox jcbTinhTrang;
     private JLabel jlbMsg;
-    
+
     private HocVien hocVien = null;
-    
+
     private HocVienService hocVienService = null;
-    
-    public HocVienController(JButton btnSubmit, JTextField jtfMaHocVien, JTextField jtfHoTen, 
-            JDateChooser jdcNgaySinh, JRadioButton jrdMale, JRadioButton jrdFemale, JTextField jtfSoDienThoai, 
+
+    public HocVienController(JButton btnSubmit, JTextField jtfMaHocVien, JTextField jtfHoTen,
+            JDateChooser jdcNgaySinh, JRadioButton jrdMale, JRadioButton jrdFemale, JTextField jtfSoDienThoai,
             JTextArea jtaDiaChi, JCheckBox jcbTinhTrang, JLabel jlbMsg) {
         this.btnSubmit = btnSubmit;
         this.jtfMaHocVien = jtfMaHocVien;
@@ -48,53 +51,65 @@ public class HocVienController {
         this.jtaDiaChi = jtaDiaChi;
         this.jcbTinhTrang = jcbTinhTrang;
         this.jlbMsg = jlbMsg;
-        
+
         this.hocVienService = new HocVienServiceImpl();
     }
-    
-    public void setView(HocVien hocVien){
+
+    public void setView(HocVien hocVien) {
         this.hocVien = hocVien;
+
+        //set data
         jtfMaHocVien.setText("#" + hocVien.getMaHocVien());
         jtfHoTen.setText(hocVien.getHoTen());
         jdcNgaySinh.setDate(hocVien.getNgaySinh());
-        if (hocVien.isGioiTinh()==true){
+        if (hocVien.isGioiTinh() == true) {
             jrdMale.setSelected(true);
-            jrdMale.setSelected(false);
         } else {
-            jrdMale.setSelected(false);
-            jrdMale.setSelected(true);
+            jrdFemale.setSelected(true);
         }
-        
+
         jtfSoDienThoai.setText(hocVien.getSoDienThoai());
         jtaDiaChi.setText(hocVien.getDiaChi());
         jcbTinhTrang.setSelected(hocVien.isTinhTrang());
+
+        //set event
+        setEvent();
     }
 
-    public void setEvent(){
+    public void setEvent() {
         btnSubmit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (jtfHoTen.getText().length()==0 || jdcNgaySinh.getDate() == null){
-                    jlbMsg.setText("Vui lòng nhập dữ liệu bắt buộc !");
-                } else {
-                    hocVien.setHoTen(jtfHoTen.getText());
-                    hocVien.setNgaySinh(jdcNgaySinh.getDate());
-                    hocVien.setGioiTinh(jrdMale.isSelected());
-                    hocVien.setSoDienThoai(jtfSoDienThoai.getText());
-                    hocVien.setDiaChi(jtaDiaChi.getText());
-                    hocVien.setTinhTrang(jcbTinhTrang.isSelected());
-                    
-                    int lastID = hocVienService.createUpdate(hocVien);
-                    if (lastID > 0){
-                        hocVien.setMaHocVien(lastID);
-                        jtfMaHocVien.setText("# " + lastID);
-                        jlbMsg.setText("Cập Nhật Dữ Liệu Thành Công");
+                try {
+                    if (!checkNull()) {
+                        jlbMsg.setText("Vui lòng nhập dữ liệu bắt buộc !");
+                    } else {
+                        hocVien.setHoTen(jtfHoTen.getText().trim());
+                        hocVien.setNgaySinh(convertDateToDateSql(jdcNgaySinh.getDate()));
+                        hocVien.setGioiTinh(jrdMale.isSelected());
+                        hocVien.setSoDienThoai(jtfSoDienThoai.getText());
+                        hocVien.setDiaChi(jtaDiaChi.getText());
+                        hocVien.setTinhTrang(jcbTinhTrang.isSelected());
+
+                        if (showDialog() == true) {
+                            int lastID = hocVienService.createUpdate(hocVien);
+                            if (lastID != 0) {
+                                hocVien.setMaHocVien(hocVien.getMaHocVien());
+                                jtfMaHocVien.setText("# " + lastID);
+                                jlbMsg.setText("Cập Nhật Dữ Liệu Thành Công");
+                            } else {
+                                jlbMsg.setText("Có lỗi xảy ra, vui lòng thử lại!");
+                            }
+                        }
                     }
+                } catch (Exception ex) {
+                    jlbMsg.setText(ex.toString());
                 }
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered(MouseEvent e
+            ) {
                 btnSubmit.setBackground(new Color(0, 200, 83));
             }
 
@@ -102,6 +117,23 @@ public class HocVienController {
             public void mouseExited(MouseEvent e) {
                 btnSubmit.setBackground(new Color(100, 221, 23));
             }
-        });
+        }
+        );
+    }
+
+    private boolean checkNull() {
+        return jtfHoTen.getText() != null && !jtfHoTen.getText().equalsIgnoreCase("");
+//      JTextField khác null và nó không rỗng
+    }
+
+    private boolean showDialog() {
+        int dialogResult = JOptionPane.showConfirmDialog(null,
+                "Bạn Có Muốn Cập Nhật Dữ Liệu Này Không ?", "Thông Báo",
+                JOptionPane.YES_NO_OPTION);
+        return dialogResult == JOptionPane.YES_OPTION;
+    }
+
+    public java.sql.Date convertDateToDateSql(Date date) {
+        return new java.sql.Date(date.getTime());
     }
 }
