@@ -10,7 +10,7 @@ public class HocVienJPanel extends javax.swing.JPanel {
     public HocVienJPanel() {
         initComponents();
         
-        QuanLyHocVienController controller = new QuanLyHocVienController(jPnView, jBtnAdd, txtSearch);
+        QuanLyHocVienController controller = new QuanLyHocVienController(jPnView, jBtnAdd, txtSearch, jBtnPrint);
         controller.setDataToTable();
         controller.setEvent();
     }
@@ -22,6 +22,7 @@ public class HocVienJPanel extends javax.swing.JPanel {
         jBtnAdd = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         jPnView = new javax.swing.JPanel();
+        jBtnPrint = new javax.swing.JButton();
 
         jPnRoot.setBackground(new java.awt.Color(204, 255, 153));
 
@@ -44,6 +45,12 @@ public class HocVienJPanel extends javax.swing.JPanel {
             .addGap(0, 432, Short.MAX_VALUE)
         );
 
+        jBtnPrint.setBackground(new java.awt.Color(76, 175, 80));
+        jBtnPrint.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jBtnPrint.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnPrint.setText("Xuất Báo Cáo");
+        jBtnPrint.setBorder(null);
+
         javax.swing.GroupLayout jPnRootLayout = new javax.swing.GroupLayout(jPnRoot);
         jPnRoot.setLayout(jPnRootLayout);
         jPnRootLayout.setHorizontalGroup(
@@ -54,7 +61,9 @@ public class HocVienJPanel extends javax.swing.JPanel {
                     .addComponent(jPnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPnRootLayout.createSequentialGroup()
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 330, Short.MAX_VALUE)
+                        .addComponent(jBtnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jBtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -62,9 +71,11 @@ public class HocVienJPanel extends javax.swing.JPanel {
             jPnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnRootLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBtnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -85,6 +96,7 @@ public class HocVienJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAdd;
+    private javax.swing.JButton jBtnPrint;
     private javax.swing.JPanel jPnRoot;
     private javax.swing.JPanel jPnView;
     private javax.swing.JTextField txtSearch;

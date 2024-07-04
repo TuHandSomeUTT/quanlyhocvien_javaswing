@@ -97,6 +97,7 @@ public class HocVienController {
                                 hocVien.setMaHocVien(hocVien.getMaHocVien());
                                 jtfMaHocVien.setText("# " + lastID);
                                 jlbMsg.setText("Cập Nhật Dữ Liệu Thành Công");
+                                
                             } else {
                                 jlbMsg.setText("Có lỗi xảy ra, vui lòng thử lại!");
                             }

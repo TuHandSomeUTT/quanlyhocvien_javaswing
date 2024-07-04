@@ -7,7 +7,7 @@ import controller.HocVienController;
  * @author tunguyen
  */
 public class HocVienJFrame extends javax.swing.JFrame {
-
+    
     public HocVienJFrame(HocVien hocVien) {
         initComponents();
         
