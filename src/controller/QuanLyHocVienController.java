@@ -47,6 +47,7 @@ public class QuanLyHocVienController {
     private JTextField jtfSearch;
     private JTable table;
     private JButton jBtnPrint;
+    private JButton jBtnDelete;
 
     private HocVienService hocVienService = null;
 
@@ -54,12 +55,13 @@ public class QuanLyHocVienController {
 
     private TableRowSorter<TableModel> rowSorter = null;
 
-    public QuanLyHocVienController(JPanel jpnView, JButton btnAdd, JTextField jtfSearch, JButton jBtnPrint) {
+    public QuanLyHocVienController(JPanel jpnView, JButton btnAdd, JTextField jtfSearch, JButton jBtnPrint, JButton jBtnDelete) {
         this.jpnView = jpnView;
         this.btnAdd = btnAdd;
         this.jtfSearch = jtfSearch;
         this.jBtnPrint = jBtnPrint;
-
+        this.jBtnDelete = jBtnDelete;
+        
         this.hocVienService = new HocVienServiceImpl();
     }
 
@@ -127,7 +129,7 @@ public class QuanLyHocVienController {
                             ? model.getValueAt(selectedRowIndex, 6).toString() : "");
                     hocVien.setTinhTrang((boolean) model.getValueAt(selectedRowIndex, 7));
 
-                    HocVienJFrame frame = new HocVienJFrame(hocVien);
+                    HocVienJFrame frame = new HocVienJFrame(hocVien, QuanLyHocVienController.this); // thử nghiệm (đoạn này thử nghiệm refeshTable)
                     frame.setTitle("Thông Tin Học Viên");
                     frame.setResizable(false);
                     frame.setLocationRelativeTo(null);
@@ -159,7 +161,7 @@ public class QuanLyHocVienController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // set sự kiện khi nhấn nút thêm thì sẽ hiển thị ra HocVienJPanel để ta thêm học viên
-                HocVienJFrame frame = new HocVienJFrame(new HocVien());
+                HocVienJFrame frame = new HocVienJFrame(new HocVien(), QuanLyHocVienController.this);// Thử ngiệm refeshTable
                 frame.setTitle("Thông Tin Học Viên");
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(false);
@@ -177,6 +179,8 @@ public class QuanLyHocVienController {
             }
         });
 
+        
+        // Đoạn này là print button
         jBtnPrint.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -264,5 +268,28 @@ public class QuanLyHocVienController {
             }
         }
         );
+        
+        // Đoạn này code thêm nút xóa
+        jBtnDelete.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                jBtnDelete.setBackground(new Color(0, 200, 83));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                jBtnDelete.setBackground(new Color(100, 221, 23));
+            }
+        });
+    }
+    
+    // Thử nghiệm refeshTable
+    public void refeshTable(){
+        setDataToTable();
     }
 }

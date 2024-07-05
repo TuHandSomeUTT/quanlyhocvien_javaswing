@@ -37,10 +37,11 @@ public class HocVienController {
     private HocVien hocVien = null;
 
     private HocVienService hocVienService = null;
-
+    private QuanLyHocVienController parentController; // Thử nghiệm
+    
     public HocVienController(JButton btnSubmit, JTextField jtfMaHocVien, JTextField jtfHoTen,
             JDateChooser jdcNgaySinh, JRadioButton jrdMale, JRadioButton jrdFemale, JTextField jtfSoDienThoai,
-            JTextArea jtaDiaChi, JCheckBox jcbTinhTrang, JLabel jlbMsg) {
+            JTextArea jtaDiaChi, JCheckBox jcbTinhTrang, JLabel jlbMsg, QuanLyHocVienController parentController) {// thử nghiệm refeshTable
         this.btnSubmit = btnSubmit;
         this.jtfMaHocVien = jtfMaHocVien;
         this.jtfHoTen = jtfHoTen;
@@ -53,6 +54,7 @@ public class HocVienController {
         this.jlbMsg = jlbMsg;
 
         this.hocVienService = new HocVienServiceImpl();
+        this.parentController = parentController; // thử nghiệm
     }
 
     public void setView(HocVien hocVien) {
@@ -98,6 +100,7 @@ public class HocVienController {
                                 jtfMaHocVien.setText("# " + lastID);
                                 jlbMsg.setText("Cập Nhật Dữ Liệu Thành Công");
                                 
+                                parentController.refeshTable(); // thử nghiệm refeshTable
                             } else {
                                 jlbMsg.setText("Có lỗi xảy ra, vui lòng thử lại!");
                             }

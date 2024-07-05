@@ -1,20 +1,34 @@
 package view;
+
 import model.HocVien;
 import controller.HocVienController;
+import controller.QuanLyHocVienController;
 
 /**
  *
  * @author tunguyen
  */
 public class HocVienJFrame extends javax.swing.JFrame {
-    
-    public HocVienJFrame(HocVien hocVien) {
+
+    private QuanLyHocVienController parentController;
+
+    public HocVienJFrame(HocVien hocVien, QuanLyHocVienController parentController) {
         initComponents();
-        
-        HocVienController controller = new HocVienController(btnSubmit, jtfMaHocVien, jtfHoVaTen, jdcNgaySinh, jrdMale, jrdFemale, jtfSoDienThoai, jtaDiaChi, jcbTinhTrang, jlbMsg);
+
+        this.parentController = parentController;
+
+        HocVienController controller = new HocVienController(btnSubmit, jtfMaHocVien, jtfHoVaTen, jdcNgaySinh, jrdMale, jrdFemale, jtfSoDienThoai, jtaDiaChi, jcbTinhTrang, jlbMsg, parentController);
         controller.setView(hocVien);
+
+        // Đăng ký sự kiện để cập nhật bảng khi form này đóng lại hoặc hoàn thành (Thử nghiệm)
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                parentController.refeshTable();
+            }
+        });
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
