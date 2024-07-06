@@ -47,20 +47,20 @@ public class QuanLyHocVienController {
     private JTextField jtfSearch;
     private JTable table;
     private JButton jBtnPrint;
-    private JButton jBtnDelete;
-
+    private JButton btnDelete;
+    
     private HocVienService hocVienService = null;
 
     private String[] listColumn = {"Mã Học Viên", "STT", "Họ Và Tên", "Ngày Sinh", "Giới Tính", "Số Điện Thoại", "Địa Chỉ", "Tình Trạng"};
 
     private TableRowSorter<TableModel> rowSorter = null;
 
-    public QuanLyHocVienController(JPanel jpnView, JButton btnAdd, JTextField jtfSearch, JButton jBtnPrint, JButton jBtnDelete) {
+    public QuanLyHocVienController(JPanel jpnView, JButton btnAdd, JTextField jtfSearch, JButton jBtnPrint, JButton btnDelete) {
         this.jpnView = jpnView;
         this.btnAdd = btnAdd;
         this.jtfSearch = jtfSearch;
         this.jBtnPrint = jBtnPrint;
-        this.jBtnDelete = jBtnDelete;
+        this.btnDelete = btnDelete;
         
         this.hocVienService = new HocVienServiceImpl();
     }
@@ -259,35 +259,53 @@ public class QuanLyHocVienController {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                jBtnPrint.setBackground(new Color(0, 200, 83));
+                jBtnPrint.setBackground(new Color(0, 191, 255));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jBtnPrint.setBackground(new Color(100, 221, 23));
+                jBtnPrint.setBackground(new Color(0, 178, 238));
             }
         }
         );
         
-        // Đoạn này code thêm nút xóa
-        jBtnDelete.addMouseListener(new MouseAdapter() {
+        btnDelete.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                
+                if (table.getSelectedRow() != -1){
+                    int selectedRowIndex = table.convertRowIndexToModel(table.getSelectedRow());
+                    int maHocVien = (int) table.getModel().getValueAt(selectedRowIndex, 0);
+                    
+                    int dialogResult = JOptionPane.showConfirmDialog(null, 
+                            "Bạn Có Chắc Chắn Muốn Xóa Học Viên Này Không?", "Thông Báo", 
+                            JOptionPane.YES_NO_OPTION);
+                    
+                    if (dialogResult == JOptionPane.YES_OPTION){
+                        boolean success = hocVienService.delete(maHocVien);
+                        
+                        if (success){
+                            JOptionPane.showMessageDialog(null, "Xóa Học Viên Thành Công");
+                            refeshTable();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Không Thể Xóa Học Viên Này Vì Có Bản Ghi Liên Quan Trong Bảng Khác");
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vui Lòng Chọn Học Viên Cần Xóa");
+                }
             }
             
-            @Override
+             @Override
             public void mouseEntered(MouseEvent e) {
-                jBtnDelete.setBackground(new Color(0, 200, 83));
+                btnDelete.setBackground(new Color(255, 0, 0));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                jBtnDelete.setBackground(new Color(100, 221, 23));
+                btnDelete.setBackground(new Color(240, 84, 84));
             }
         });
     }
-    
     // Thử nghiệm refeshTable
     public void refeshTable(){
         setDataToTable();

@@ -94,4 +94,21 @@ public class HocVienDAOImpl implements HocVienDAO{
         }
         return 0;
     }
+
+    @Override
+    public boolean detete(int maHocVien) {
+        Connection SqlConn = DBConnect.getConnection();
+        String SqlQuery = "DELETE FROM hoc_vien WHERE ma_hoc_vien = ?";
+        try {
+            PreparedStatement pst = SqlConn.prepareStatement(SqlQuery);
+            pst.setInt(1, maHocVien);
+            int rowAffected = pst.executeUpdate();
+            pst.close();
+            SqlConn.close();
+            return rowAffected > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

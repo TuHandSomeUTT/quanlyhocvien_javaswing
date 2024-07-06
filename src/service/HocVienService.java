@@ -11,4 +11,6 @@ public interface HocVienService {
     public List<HocVien> getList();
     
     public int createUpdate(HocVien hocVien);
+    
+    public boolean delete(int maHocVien);
 }

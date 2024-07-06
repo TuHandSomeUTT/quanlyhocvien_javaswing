@@ -27,5 +27,10 @@ public class HocVienServiceImpl implements HocVienService{
     public int createUpdate(HocVien hocVien) {
         return hocVienDAO.createOrUpdate(hocVien);
     }
+
+    @Override
+    public boolean delete(int maHocVien) {
+        return hocVienDAO.detete(maHocVien);
+    }
     
 }

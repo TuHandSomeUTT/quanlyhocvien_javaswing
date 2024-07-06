@@ -24,6 +24,7 @@ import java.util.Date;
 public class HocVienController {
 
     private JButton btnSubmit;
+    private JButton btnDelete;
     private JTextField jtfMaHocVien;
     private JTextField jtfHoTen;
     private JDateChooser jdcNgaySinh;
@@ -39,10 +40,11 @@ public class HocVienController {
     private HocVienService hocVienService = null;
     private QuanLyHocVienController parentController; // Thử nghiệm
     
-    public HocVienController(JButton btnSubmit, JTextField jtfMaHocVien, JTextField jtfHoTen,
+    public HocVienController(JButton btnSubmit, JButton btnDelete,JTextField jtfMaHocVien, JTextField jtfHoTen,
             JDateChooser jdcNgaySinh, JRadioButton jrdMale, JRadioButton jrdFemale, JTextField jtfSoDienThoai,
             JTextArea jtaDiaChi, JCheckBox jcbTinhTrang, JLabel jlbMsg, QuanLyHocVienController parentController) {// thử nghiệm refeshTable
         this.btnSubmit = btnSubmit;
+        this.btnDelete = btnDelete;
         this.jtfMaHocVien = jtfMaHocVien;
         this.jtfHoTen = jtfHoTen;
         this.jdcNgaySinh = jdcNgaySinh;
@@ -123,6 +125,35 @@ public class HocVienController {
             }
         }
         );
+        
+        btnDelete.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    int maHocVien = Integer.parseInt(jtfMaHocVien.getText().substring(1));
+                    if (showDialogDelete()){
+                        boolean success = hocVienService.delete(maHocVien);
+                        if (success){
+                            jlbMsg.setText("Xóa Học Viên Thành Công");
+                        } else {
+                            jlbMsg.setText("Không Thể Xóa Học Viên Này Vì Có Bản Ghi Liên Quan Trong Bảng Khác");
+                        }
+                    }
+                } catch (Exception ex) {
+                    jlbMsg.setText(ex.toString());
+                }
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnDelete.setBackground(new Color(255, 0, 0));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnDelete.setBackground(new Color(240, 84, 84));
+            }
+        });
     }
 
     private boolean checkNull() {
@@ -137,6 +168,13 @@ public class HocVienController {
         return dialogResult == JOptionPane.YES_OPTION;
     }
 
+    private boolean showDialogDelete() {
+        int dialogResult = JOptionPane.showConfirmDialog(null,
+                "Bạn Có Muốn Xóa Dữ Liệu Này Không ?", "Thông Báo",
+                JOptionPane.YES_NO_OPTION);
+        return dialogResult == JOptionPane.YES_OPTION;
+    }
+    
     public java.sql.Date convertDateToDateSql(Date date) {
         return new java.sql.Date(date.getTime());
     }

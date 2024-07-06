@@ -45,8 +45,8 @@
                           <EmptySpace pref="162" max="32767" attributes="0"/>
                           <Component id="jBtnAdd" min="-2" pref="150" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jBtnDelete" min="-2" pref="150" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="btnDelete" min="-2" pref="150" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jBtnPrint" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -62,8 +62,8 @@
                       <Component id="txtSearch" min="-2" pref="30" max="-2" attributes="0"/>
                       <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                           <Component id="jBtnAdd" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="jBtnDelete" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           <Component id="jBtnPrint" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="btnDelete" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -116,7 +116,7 @@
         <Component class="javax.swing.JButton" name="jBtnPrint">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="50" green="af" red="4c" type="rgb"/>
+              <Color blue="cd" green="9a" red="0" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
@@ -130,10 +130,10 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jBtnDelete">
+        <Component class="javax.swing.JButton" name="btnDelete">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="50" green="af" red="4c" type="rgb"/>
+              <Color blue="54" green="54" red="f0" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
@@ -141,7 +141,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="X&#xf3;a D&#x1eef; Li&#x1ec7;u"/>
+            <Property name="text" type="java.lang.String" value="X&#xf3;a H&#x1ecd;c Vi&#xea;n"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
             </Property>
