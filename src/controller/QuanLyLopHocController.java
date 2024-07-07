@@ -6,6 +6,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,6 +16,7 @@ import javax.swing.JTextField;
 import service.LopHocService;
 import service.LopHocServiceImpl;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,6 +29,11 @@ import javax.swing.table.TableRowSorter;
 import model.HocVien;
 import model.KhoaHoc;
 import model.LopHoc;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import utility.LopHocClassTableModel;
 import view.LopHocJFrame;
 
@@ -192,7 +201,7 @@ public class QuanLyLopHocController {
         jpnView.validate();
         jpnView.repaint();
     }
-    
+
     public void setEvent() {
         btnAdd.addMouseListener(new MouseAdapter() {
             @Override
@@ -215,39 +224,39 @@ public class QuanLyLopHocController {
                 btnAdd.setBackground(new Color(100, 221, 23));
             }
         });
-        
+
         // Delete button
         btnDelete.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    if (table.getSelectedRow() != -1){
-                    int selectedRowIndex = table.convertRowIndexToModel(table.getSelectedRow());
-                    int maLopHoc = (int) table.getModel().getValueAt(selectedRowIndex, 0);
-                    
-                    int dialogResult = JOptionPane.showConfirmDialog(null, 
-                            "Bạn Có Chắc Chắn Muốn Xóa Lớp Học Này Không?", "Thông Báo", 
-                            JOptionPane.YES_NO_OPTION);
-                    
-                    if (dialogResult == JOptionPane.YES_OPTION){
-                        boolean success = lopHocService.delete(maLopHoc);
-                        
-                        if (success){
-                            JOptionPane.showMessageDialog(null, "Xóa Lớp Học Thành Công");
-                            refeshTable();
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Không Thể Xóa Lớp Học Này, Vui Lòng Thử Lại");
+                    if (table.getSelectedRow() != -1) {
+                        int selectedRowIndex = table.convertRowIndexToModel(table.getSelectedRow());
+                        int maLopHoc = (int) table.getModel().getValueAt(selectedRowIndex, 0);
+
+                        int dialogResult = JOptionPane.showConfirmDialog(null,
+                                "Bạn Có Chắc Chắn Muốn Xóa Lớp Học Này Không?", "Thông Báo",
+                                JOptionPane.YES_NO_OPTION);
+
+                        if (dialogResult == JOptionPane.YES_OPTION) {
+                            boolean success = lopHocService.delete(maLopHoc);
+
+                            if (success) {
+                                JOptionPane.showMessageDialog(null, "Xóa Lớp Học Thành Công");
+                                refeshTable();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Không Thể Xóa Lớp Học Này, Vui Lòng Thử Lại");
+                            }
                         }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Vui Lòng Chọn Lớp Học Cần Xóa");
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Vui Lòng Chọn Lớp Học Cần Xóa");
-                }
                 } catch (Exception ez) {
                     ez.printStackTrace();
                 }
             }
-            
-             @Override
+
+            @Override
             public void mouseEntered(MouseEvent e) {
                 btnDelete.setBackground(new Color(255, 0, 0));
             }
@@ -257,11 +266,68 @@ public class QuanLyLopHocController {
                 btnDelete.setBackground(new Color(240, 84, 84));
             }
         });
+
+        // Đoạn này là print button
+        btnPrint.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    XSSFWorkbook workbook = new XSSFWorkbook();
+                    XSSFSheet sheet = workbook.createSheet("Danh sách lớp học");
+
+                    XSSFRow headerRow = sheet.createRow(0);
+                    for (int i = 0; i < table.getColumnCount(); i++) {
+                        headerRow.createCell(i).setCellValue(table.getColumnName(i));
+                    }
+
+                    for (int row = 0; row < table.getRowCount(); row++) {
+                        XSSFRow excelRow = sheet.createRow(row + 1);
+                        for (int col = 0; col < table.getColumnCount(); col++) {
+                            Object value = table.getValueAt(row, col);
+                            if (value != null) {
+                                excelRow.createCell(col).setCellValue(value.toString());
+                            } else {
+                                excelRow.createCell(col).setCellValue("");
+                            }
+                        }
+                    }
+
+                    JFileChooser fileChooser = new JFileChooser();
+                    fileChooser.setDialogTitle("Lưu file Excel");
+                    fileChooser.setSelectedFile(new File("DanhSachLopHoc.xlsx"));
+                    int userSelection = fileChooser.showSaveDialog(null);
+
+                    if (userSelection == JFileChooser.APPROVE_OPTION) {
+                        File fileToSave = fileChooser.getSelectedFile();
+                        if (!fileToSave.getAbsolutePath().endsWith(".xlsx")) {
+                            fileToSave = new File(fileToSave + ".xlsx");
+                        }
+
+                        try (FileOutputStream fos = new FileOutputStream(fileToSave)) {
+                            workbook.write(fos);
+                            JOptionPane.showMessageDialog(null, "Xuất Excel thành công. File được lưu tại: " + fileToSave.getAbsolutePath());
+                        }
+                    }
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "Lỗi xuất Excel: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnPrint.setBackground(new Color(0, 191, 255));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnPrint.setBackground(new Color(0, 178, 238));
+            }
+        });
+
     }
-    
+
     // Thử nghiệm refeshTable
-    public void refeshTable(){
+    public void refeshTable() {
         setDataToTable();
     }
 }
-

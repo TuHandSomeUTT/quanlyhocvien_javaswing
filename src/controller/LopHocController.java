@@ -34,7 +34,6 @@ public class LopHocController {
 
     private JButton btnAdd;
     private JButton btnDelete;
-    private JButton btnPrint;
     private JTextArea txtTenLopHoc;
     private JTextField txtMaLopHoc;
     private JDateChooser jdcNgayDangKy;
@@ -48,11 +47,10 @@ public class LopHocController {
 
     private QuanLyLopHocController parentController; // Thử nghiệm
 
-    public LopHocController(JButton btnAdd, JButton btnDelete, JButton btnPrint, JTextArea txtTenLopHoc, JTextField txtMaLopHoc, JDateChooser jdcNgayDangKy,
+    public LopHocController(JButton btnAdd, JButton btnDelete, JTextArea txtTenLopHoc, JTextField txtMaLopHoc, JDateChooser jdcNgayDangKy,
             JComboBox<String> jcbbMaKhoaHoc, JComboBox<String> jcbbMaHocVien, JCheckBox jcbxTinhTrang, JLabel jlbMsg, QuanLyLopHocController parentController) { // thử nghiệm refeshTable
         this.btnAdd = btnAdd;
         this.btnDelete = btnDelete;
-        this.btnPrint = btnPrint;
         this.txtTenLopHoc = txtTenLopHoc;
         this.txtMaLopHoc = txtMaLopHoc;
         this.jdcNgayDangKy = jdcNgayDangKy;

@@ -19,7 +19,7 @@ public class LopHocJFrame extends javax.swing.JFrame {
         
         this.parentController = parentController;
         
-        LopHocController controller = new LopHocController(btnAdd, btnDelete, jBtnPrint, jtaTenLopHoc, txtMaLopHoc, jDcNgayDangKy, jCbbMaKhoaHoc, jCbbMaHocVien, jCboxTinhTrang, jlbMsg, parentController);
+        LopHocController controller = new LopHocController(btnAdd, btnDelete, jtaTenLopHoc, txtMaLopHoc, jDcNgayDangKy, jCbbMaKhoaHoc, jCbbMaHocVien, jCboxTinhTrang, jlbMsg, parentController);
         controller.setView(lopHoc);
         
         // Đăng ký sự kiện để cập nhật bảng khi form này đóng lại hoặc hoàn thành (Thử nghiệm)
@@ -63,7 +63,6 @@ public class LopHocJFrame extends javax.swing.JFrame {
         jCbbMaKhoaHoc = new javax.swing.JComboBox<>();
         jCbbMaHocVien = new javax.swing.JComboBox<>();
         jlbMsg = new javax.swing.JLabel();
-        jBtnPrint = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -175,7 +174,7 @@ public class LopHocJFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel14))))
                     .addComponent(jLabel11)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jpnChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnChildLayout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,7 +184,7 @@ public class LopHocJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 45, Short.MAX_VALUE))
         );
         jpnChildLayout.setVerticalGroup(
             jpnChildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,12 +229,6 @@ public class LopHocJFrame extends javax.swing.JFrame {
         jlbMsg.setForeground(new java.awt.Color(255, 51, 51));
         jlbMsg.setText("...");
 
-        jBtnPrint.setBackground(new java.awt.Color(76, 175, 80));
-        jBtnPrint.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jBtnPrint.setForeground(new java.awt.Color(255, 255, 255));
-        jBtnPrint.setText("Xuất Báo Cáo");
-        jBtnPrint.setBorder(null);
-
         javax.swing.GroupLayout jPnRootLayout = new javax.swing.GroupLayout(jPnRoot);
         jPnRoot.setLayout(jPnRootLayout);
         jPnRootLayout.setHorizontalGroup(
@@ -245,12 +238,10 @@ public class LopHocJFrame extends javax.swing.JFrame {
                 .addGroup(jPnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPnRootLayout.createSequentialGroup()
                         .addComponent(jlbMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jpnChild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -261,8 +252,7 @@ public class LopHocJFrame extends javax.swing.JFrame {
                 .addGroup(jPnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlbMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jpnChild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -289,7 +279,6 @@ public class LopHocJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton jBtnPrint;
     private javax.swing.JComboBox<String> jCbbMaHocVien;
     private javax.swing.JComboBox<String> jCbbMaKhoaHoc;
     private javax.swing.JCheckBox jCboxTinhTrang;
