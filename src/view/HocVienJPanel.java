@@ -30,6 +30,7 @@ public class HocVienJPanel extends javax.swing.JPanel {
         jBtnAdd.setBackground(new java.awt.Color(76, 175, 80));
         jBtnAdd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBtnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btn_save.png"))); // NOI18N
         jBtnAdd.setText("+ Thêm Mới");
         jBtnAdd.setBorder(null);
 
@@ -49,12 +50,14 @@ public class HocVienJPanel extends javax.swing.JPanel {
         jBtnPrint.setBackground(new java.awt.Color(0, 154, 205));
         jBtnPrint.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBtnPrint.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/printer.png"))); // NOI18N
         jBtnPrint.setText("Xuất Báo Cáo");
         jBtnPrint.setBorder(null);
 
         btnDelete.setBackground(new java.awt.Color(240, 84, 84));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete.png"))); // NOI18N
         btnDelete.setText("Xóa Học Viên");
         btnDelete.setBorder(null);
 

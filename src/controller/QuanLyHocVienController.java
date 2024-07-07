@@ -331,6 +331,7 @@ public class QuanLyHocVienController {
             }
         });
     }
+    
     // Thử nghiệm refeshTable
     public void refeshTable(){
         setDataToTable();

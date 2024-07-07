@@ -99,7 +99,7 @@ public class HocVienController {
                             int lastID = hocVienService.createUpdate(hocVien);
                             if (lastID != 0) {
                                 hocVien.setMaHocVien(hocVien.getMaHocVien());
-                                jtfMaHocVien.setText("# " + lastID);
+                                jtfMaHocVien.setText("#" + lastID);
                                 jlbMsg.setText("Cập Nhật Dữ Liệu Thành Công");
                                 
                                 parentController.refeshTable(); // thử nghiệm refeshTable
@@ -142,6 +142,7 @@ public class HocVienController {
                     }
                 } catch (Exception ex) {
                     jlbMsg.setText(ex.toString());
+                    ex.printStackTrace();
                 }
             }
             

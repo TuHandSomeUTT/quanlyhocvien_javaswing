@@ -66,9 +66,10 @@ public class LopHocJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        btnDelete.setBackground(new java.awt.Color(76, 175, 80));
+        btnDelete.setBackground(new java.awt.Color(240, 84, 84));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete.png"))); // NOI18N
         btnDelete.setText("Xóa Dữ Liệu");
         btnDelete.setBorder(null);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +81,8 @@ public class LopHocJFrame extends javax.swing.JFrame {
         btnAdd.setBackground(new java.awt.Color(76, 175, 80));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setText("+ Thêm Mới");
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btn_save.png"))); // NOI18N
+        btnAdd.setText("Lưu Dữ Liệu");
         btnAdd.setBorder(null);
 
         jpnChild.setBackground(new java.awt.Color(255, 255, 255));

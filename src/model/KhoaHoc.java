@@ -65,6 +65,6 @@ public class KhoaHoc {
 
     @Override
     public String toString() {
-        return "KhoaHoc{" + "maKhoaHoc=" + maKhoaHoc + ", tenMonHoc=" + tenMonHoc + '}';
+        return "KhoaHoc{" + "maKhoaHoc=" + maKhoaHoc + ", tenMonHoc=" + tenMonHoc + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + ", moTa=" + moTa + ", tinhTrang=" + tinhTrang + '}';
     }
 }

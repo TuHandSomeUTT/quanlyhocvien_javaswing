@@ -32,12 +32,14 @@ public class LopHocJPanel extends javax.swing.JPanel {
         btnPrint.setBackground(new java.awt.Color(0, 154, 205));
         btnPrint.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnPrint.setForeground(new java.awt.Color(255, 255, 255));
+        btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/printer.png"))); // NOI18N
         btnPrint.setText("Xuất Báo Cáo");
         btnPrint.setBorder(null);
 
         btnDelete.setBackground(new java.awt.Color(240, 84, 84));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete.png"))); // NOI18N
         btnDelete.setText("Xóa Dữ Liệu");
         btnDelete.setBorder(null);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -49,6 +51,7 @@ public class LopHocJPanel extends javax.swing.JPanel {
         btnAdd.setBackground(new java.awt.Color(76, 175, 80));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/btn_save.png"))); // NOI18N
         btnAdd.setText("+ Thêm Mới");
         btnAdd.setBorder(null);
 

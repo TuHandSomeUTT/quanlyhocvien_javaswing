@@ -243,6 +243,7 @@ public class HocVienJFrame extends javax.swing.JFrame {
         btnDelete.setBackground(new java.awt.Color(76, 175, 80));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete.png"))); // NOI18N
         btnDelete.setText("Xóa Dữ Liệu");
         btnDelete.setBorder(null);
 
