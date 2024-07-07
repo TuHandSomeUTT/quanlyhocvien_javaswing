@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import view.HocVienJPanel;
 import view.KhoaHocJPanel;
+import view.LopHocJPanel;
 import view.ThongKeJPanel;
 import view.TrangChuJPanel;
 
@@ -36,7 +37,7 @@ public class ChuyenManHinhController {
         
         root.removeAll();
         root.setLayout(new BorderLayout());
-        root.add(new TrangChuJPanel());
+        root.add(new TrangChuJPanel()); // Khi bắt đầu chạy, chương trình sẽ nhảy vào jpanel này đầu tiên
         root.validate();
         root.repaint();
     }
@@ -76,6 +77,9 @@ public class ChuyenManHinhController {
                 // More ...    
                 case "ThongKe" :
                     node = new ThongKeJPanel();
+                    break;
+                case "LopHoc" :
+                    node = new LopHocJPanel();
                     break;
                 default :
                     node = new TrangChuJPanel();

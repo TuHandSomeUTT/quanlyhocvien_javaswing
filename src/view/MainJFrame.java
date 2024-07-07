@@ -17,7 +17,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         ChuyenManHinhController controller = new ChuyenManHinhController(jpnView);
-        controller.setView(jpnTrangChu, jlbTrangChu);
+        controller.setView(jpnTrangChu, jlbTrangChu); // khi chạy chương trình sẽ đặt điểm bắt đầu ở đây
         
         List<DanhMucBean> listItem = new ArrayList<DanhMucBean>();
         listItem.add(new DanhMucBean("TrangChu", jpnTrangChu, jlbTrangChu));

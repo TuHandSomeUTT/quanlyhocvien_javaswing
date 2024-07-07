@@ -62,4 +62,9 @@ public class KhoaHoc {
     public void setTinhTrang(boolean tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
+
+    @Override
+    public String toString() {
+        return "KhoaHoc{" + "maKhoaHoc=" + maKhoaHoc + ", tenMonHoc=" + tenMonHoc + '}';
+    }
 }

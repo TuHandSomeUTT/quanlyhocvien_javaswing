@@ -110,6 +110,7 @@ public class HocVienController {
                     }
                 } catch (Exception ex) {
                     jlbMsg.setText(ex.toString());
+                    ex.printStackTrace();
                 }
             }
 

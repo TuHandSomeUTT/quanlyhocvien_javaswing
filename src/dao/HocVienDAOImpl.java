@@ -88,6 +88,8 @@ public class HocVienDAOImpl implements HocVienDAO{
                 // Lay gia tri cua cot dau tien trong result set (Cột này thường sẽ là khóa chính và tự động tăng)
             }
             pst.close();
+            rs.close();
+            DBConnect.closeConnection(SqlConn);
             return generatedKey;
         } catch (Exception e) {
             e.printStackTrace();

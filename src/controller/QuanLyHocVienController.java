@@ -105,11 +105,35 @@ public class QuanLyHocVienController {
         table.getColumnModel().getColumn(0).setMaxWidth(0);
         table.getColumnModel().getColumn(0).setPreferredWidth(0);
 
-        // Cài đặt hiển thị cho cột có chỉ số index là 1 (Cột ID).
+        // Cài đặt hiển thị cho cột có chỉ số index là 1 (Cột STT).
         table.getColumnModel().getColumn(1).setMinWidth(60);
         table.getColumnModel().getColumn(1).setMaxWidth(60);
         table.getColumnModel().getColumn(1).setPreferredWidth(60);
 
+        // Cột họ và tên ok, giữ nguyên (index 2)
+        
+        // Cột ngày sinh thu nhỏ lại chút (index 3)
+        table.getColumnModel().getColumn(3).setMinWidth(150);
+        table.getColumnModel().getColumn(3).setMaxWidth(150);
+        table.getColumnModel().getColumn(3).setPreferredWidth(150);
+        
+        // Cột giới tính thu nhỏ lại (index 4)
+        table.getColumnModel().getColumn(4).setMinWidth(130);
+        table.getColumnModel().getColumn(4).setMaxWidth(130);
+        table.getColumnModel().getColumn(4).setPreferredWidth(130);
+        
+        // Cột std (index 5)
+        table.getColumnModel().getColumn(5).setMinWidth(150);
+        table.getColumnModel().getColumn(5).setMaxWidth(150);
+        table.getColumnModel().getColumn(5).setPreferredWidth(150);
+        
+        // Cột Địa Chỉ OK
+        
+        // Cột tình trạng, thu nhỏ lại chút
+        table.getColumnModel().getColumn(7).setMinWidth(100);
+        table.getColumnModel().getColumn(7).setMaxWidth(100);
+        table.getColumnModel().getColumn(7).setPreferredWidth(100);
+        
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -120,6 +144,7 @@ public class QuanLyHocVienController {
 
                     HocVien hocVien = new HocVien();
                     hocVien.setMaHocVien((int) model.getValueAt(selectedRowIndex, 0));
+                    //column 1 bỏ qua vì nó là STT
                     hocVien.setHoTen(model.getValueAt(selectedRowIndex, 2).toString());
                     hocVien.setNgaySinh((Date) model.getValueAt(selectedRowIndex, 3));
                     hocVien.setGioiTinh(model.getValueAt(selectedRowIndex, 4).toString().equalsIgnoreCase("Nam"));

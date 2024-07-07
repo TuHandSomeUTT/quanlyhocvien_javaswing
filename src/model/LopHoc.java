@@ -10,6 +10,7 @@ import java.util.Date;
  */
 public class LopHoc{
     private int maLopHoc;
+    private String tenLopHoc;
     private KhoaHoc khoaHoc;
     private HocVien hocVien;
     private Date ngayDangKy;
@@ -23,6 +24,14 @@ public class LopHoc{
         this.maLopHoc = maLopHoc;
     }
 
+    public String getTenLopHoc(){
+        return tenLopHoc;
+    }
+    
+    public void setTenLopHoc(String tenLopHoc){
+        this.tenLopHoc = tenLopHoc;
+    }
+    
     public KhoaHoc getKhoaHoc() {
         return khoaHoc;
     }
@@ -53,5 +62,10 @@ public class LopHoc{
 
     public void setTinhTrang(boolean tinhTrang) {
         this.tinhTrang = tinhTrang;
+    }
+
+    @Override
+    public String toString() {
+        return "LopHoc{" + "maLopHoc=" + maLopHoc + ", tenLopHoc=" + tenLopHoc + ", khoaHoc=" + khoaHoc + ", hocVien=" + hocVien + ", ngayDangKy=" + ngayDangKy + ", tinhTrang=" + tinhTrang + '}';
     }
 }

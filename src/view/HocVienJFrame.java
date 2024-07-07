@@ -19,7 +19,7 @@ public class HocVienJFrame extends javax.swing.JFrame {
 
         HocVienController controller = new HocVienController(btnSubmit, btnDelete, jtfMaHocVien, jtfHoVaTen, jdcNgaySinh, jrdMale, jrdFemale, jtfSoDienThoai, jtaDiaChi, jcbTinhTrang, jlbMsg, parentController);
         controller.setView(hocVien);
-
+        
         // Đăng ký sự kiện để cập nhật bảng khi form này đóng lại hoặc hoàn thành (Thử nghiệm)
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
